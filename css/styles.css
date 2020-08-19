@@ -139,6 +139,8 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* Login */
 .imagelogin{
     display: block;
     margin-left: auto;
@@ -176,4 +178,19 @@ a.custom-card:hover {
 }
 .btn,.btn-lg,.btn-primary,.btn-block{
   background-color: #d61c6c;
+}
+
+/* Info Usuario */
+#infoUsuario{
+float: right;
+background-color: transparent;
+} 
+#usuario {
+  color: white;
+}
+#salir{
+  float: right;
+  border: none;
+  margin: 8px 8px;
+  cursor: pointer;
 }

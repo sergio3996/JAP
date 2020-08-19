@@ -3,6 +3,7 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("ingresar").addEventListener("click", function(e){
+        
         let password = document.getElementById("Inpassword");
         let email = document.getElementById("Inemail");
         let camposCompletos = true;
@@ -10,9 +11,12 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (password.value === '' || email.value === ''){
             camposCompletos = false;
             alert("Debes ingresar los datos!");
+        
         }
+        
         if (camposCompletos){
             window.location = "inicio.html";
+            localStorage.setItem('Usuario', JSON.stringify({ email: email.value}));
         }
        
 
