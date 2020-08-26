@@ -194,3 +194,8 @@ background-color: transparent;
   margin: 8px 8px;
   cursor: pointer;
 }
+
+#searchbar{
+  float: right;
+  
+}
