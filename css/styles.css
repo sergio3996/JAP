@@ -177,7 +177,7 @@ a.custom-card:hover {
   border-top-right-radius: 0;
 }
 .btn,.btn-lg,.btn-primary,.btn-block{
-  background-color: #d61c6c;
+  background-color: #ccb878b2;
 }
 
 /* Info Usuario */
@@ -198,4 +198,13 @@ background-color: transparent;
 #searchbar{
   float: right;
   
+}
+#hrcomentario{
+  border: 1px solid rgba(202, 199, 199, 0.788);
+  border-radius: 5px;
+}
+#fecha{
+  font-size: small;
+  color: grey;
+  text-align: right;
 }

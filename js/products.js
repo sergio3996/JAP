@@ -51,18 +51,19 @@ function showProductsList() {
         <div class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
-                    <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
+                    <img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
                 </div>
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                     <div class="mb-1">
-                        <h4>`+ product.name + `</h4>
-                        <p>`+ product.description + `</p>
+                        <h4>${product.name}</h4>
+                        <p>${product.description}</p>
                     </div>
-                        <small class="text-muted">Precio: ` + product.currency + product.cost + `</small>
+                        <small class="text-muted">Precio: ${product.currency} ${product.cost}</small>
                         
                     </div>
-                    <p>`+ product.soldCount + ` Productos vendidos</p>
+                    <p>${product.soldCount} Productos vendidos</p><br>
+                    <p><a href="product-info.html">Aquí</a> puede ver informacion del producto</p>
                     
                 </div>
             </div>

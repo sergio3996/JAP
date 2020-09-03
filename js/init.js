@@ -48,11 +48,13 @@ document.addEventListener("DOMContentLoaded", function(e){
   let usuarioLogueado = localStorage.getItem('Usuario');
   let infoUsuario = document.getElementById("infoUsuario");
   let Usuario = document.getElementById("usuario");
+  let Comentarios = document.getElementById('newcomments')
 
   if (usuarioLogueado) {
     usuarioLogueado = JSON.parse(usuarioLogueado);
     Usuario.innerHTML = Usuario.innerText + 'Usuario: ' + usuarioLogueado.email;
     infoUsuario.style = "display: inline-block";
+    Comentarios.style = "display: inline-block";
   }
 
   document.getElementById("salir").addEventListener("click", function(e){
