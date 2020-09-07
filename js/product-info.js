@@ -20,44 +20,45 @@ function showProductInfo(array) {
     }
 }
 
+function sendComment(commentt) {
+    if (document.getElementById("newcomm").value != "") {
+        commentsArray.push(commentt)
+    }
+}
+
 function showComments(array) {
     let htmlContentToAppend = "";
-    let puntos = "";
-    
+    let stars = "";
 
-    
-    
+
+
+
     for (let i = 0; i < array.length; i++) {
         let comment = array[i];
-        
-        for(let i = 1; i <= comment.score; i++){
-            puntos += `<span class="fa fa-star checked"></span>`;
+
+        for (let i = 1; i <= comment.score; i++) {
+            stars += `<span class="fa fa-star checked"></span>`;
         }
 
-        for(let i = comment.score + 1; i <= 5; i++){
-            puntos += `<span class="fa fa-star"></span>`;
+        for (let i = comment.score + 1; i <= 5; i++) {
+            stars += `<span class="fa fa-star"></span>`;
         }
 
         htmlContentToAppend += '<p><strong>' + comment.user + ':</strong></p>';
         htmlContentToAppend += '<p>' + comment.description + '</p>';
-        htmlContentToAppend += '<p>Puntuación: ' + puntos + '</p>';
+        htmlContentToAppend += '<p>Puntuación: ' + stars + '</p>';
         htmlContentToAppend += '<p id="fecha">' + comment.dateTime + '</p>';
         htmlContentToAppend += '<hr id="hrcomentario">';
-        puntos = "";
-    
-        
-        
-        
-        
-        
+        stars = "";
+
+
+
         document.getElementById("comments").innerHTML = htmlContentToAppend;
-        
+
 
 
     }
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
@@ -87,15 +88,24 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     })
 
-    document.getElementById("sendcomm").addEventListener("click", function(){
+    document.getElementById("sendcomm").addEventListener("click", function () {
         var x = new Date();
         let newComm = {
             score: parseInt(document.getElementById("stars").value),
             description: document.getElementById("newcomm").value,
             user: JSON.parse(localStorage.getItem("Usuario")).email,
-            dateTime: x.getFullYear() + "-" + (x.getMonth()+1) + "-" + x.getDate() + "  " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds()
+            dateTime: x.getFullYear() + "-" + (x.getMonth() + 1) + "-" + x.getDate() + "  " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds()
         };
-       commentsArray.push(newComm);
-       showComments(commentsArray);
+
+
+        sendComment(newComm);
+        showComments(commentsArray);
     })
+
+    let usuarioLogueado = localStorage.getItem('Usuario');
+    let Comentarios = document.getElementById('newcomments')
+    if (usuarioLogueado) {
+        Comentarios.style = "display: inline-block";
+    }
+
 });
