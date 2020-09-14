@@ -1,5 +1,6 @@
 var productInfoArray = [];
 var commentsArray = [];
+var productsArray = [];
 
 function showProductInfo(array) {
 
@@ -50,6 +51,7 @@ function showComments(array) {
         htmlContentToAppend += '<p id="fecha">' + comment.dateTime + '</p>';
         htmlContentToAppend += '<hr id="hrcomentario">';
         stars = "";
+        
 
 
 
@@ -58,6 +60,35 @@ function showComments(array) {
 
 
     }
+}
+
+function showRelatedProducts(ArrayProducts, ArrayRelatedProducts) {
+    let htmlContentToAppend = ''
+    ArrayRelatedProducts.forEach(function(i){
+
+        htmlContentToAppend += `
+        <div class="list-group-item list-group-item-action">
+            <div class="row">
+                <div class="col-3">
+                    <img src="${ArrayProducts[i].imgSrc}" alt="${ArrayProducts[i].description}" class="img-thumbnail">
+                </div>
+                <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                        <h4>${ArrayProducts[i].name}</h4>
+                        <p>${ArrayProducts[i].description}</p>
+                    </div>
+                        <small class="text-muted">Precio: ${ArrayProducts[i].currency} ${ArrayProducts[i].cost}</small>
+                        
+                    </div>
+                    <p>${ArrayProducts[i].soldCount} Productos vendidos</p><br>
+                    
+                </div>
+            </div>
+        </div>
+        `
+    });
+    document.getElementById("relatedproducts").innerHTML = htmlContentToAppend;
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -85,6 +116,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
         if (resultObj.status === "ok") {
             commentsArray = resultObj.data;
             showComments(commentsArray);
+        }
+    })
+
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            productsArray = resultObj.data;
+            showRelatedProducts(productsArray, productInfoArray.relatedProducts)
         }
     })
 
