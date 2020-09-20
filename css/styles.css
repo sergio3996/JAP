@@ -183,16 +183,22 @@ a.custom-card:hover {
 /* Info Usuario */
 #infoUsuario{
 float: right;
-background-color: transparent;
+
 } 
 #usuario {
-  color: white;
+    background-color: transparent;
+    border: white;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
-#salir{
-  float: right;
-  border: none;
-  margin: 8px 8px;
-  cursor: pointer;
+#usuario:hover {
+  background-color: #4d504d;
+  color: white;
 }
 
 #searchbar{
@@ -208,3 +214,4 @@ background-color: transparent;
   color: grey;
   text-align: right;
 }
+

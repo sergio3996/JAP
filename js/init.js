@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   if (usuarioLogueado) {
     usuarioLogueado = JSON.parse(usuarioLogueado);
-    Usuario.innerHTML = Usuario.innerText + 'Usuario: ' + usuarioLogueado.email;
+    Usuario.innerHTML = Usuario.innerText+ "Bienvenido " + usuarioLogueado.email + "!";
     infoUsuario.style = "display: inline-block";
   }
 

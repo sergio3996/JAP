@@ -2,25 +2,6 @@ var productInfoArray = [];
 var commentsArray = [];
 var productsArray = [];
 
-function showProductInfo(array) {
-
-    let htmlContentToAppend = "";
-
-    for (let i = 0; i < array.length; i++) {
-        let images = array[i];
-
-        htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + images + `" alt="">
-            </div>
-        </div>
-        `
-
-        document.getElementById("productImages").innerHTML = htmlContentToAppend;
-    }
-}
-
 function sendComment(commentt) {
     if (document.getElementById("newcomm").value != "") {
         commentsArray.push(commentt)
@@ -67,25 +48,19 @@ function showRelatedProducts(ArrayProducts, ArrayRelatedProducts) {
     ArrayRelatedProducts.forEach(function(i){
 
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <a href="product-info.html" class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="${ArrayProducts[i].imgSrc}" alt="${ArrayProducts[i].description}" class="img-thumbnail">
                 </div>
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
-                    <div class="mb-1">
-                        <h4>${ArrayProducts[i].name}</h4>
-                        <p>${ArrayProducts[i].description}</p>
+                        <h4 class="mb-1">${ArrayProducts[i].name}</h4><br>
                     </div>
-                        <small class="text-muted">Precio: ${ArrayProducts[i].currency} ${ArrayProducts[i].cost}</small>
-                        
-                    </div>
-                    <p>${ArrayProducts[i].soldCount} Productos vendidos</p><br>
-                    
+                    <p class="mb-1">${ArrayProducts[i].description}</p><br>
                 </div>
             </div>
-        </div>
+        </a>
         `
     });
     document.getElementById("relatedproducts").innerHTML = htmlContentToAppend;
@@ -108,7 +83,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
             productCost.innerHTML = productInfoArray.cost + " " + productInfoArray.currency;
             productCategory.innerHTML = productInfoArray.category;
 
-            showProductInfo(productInfoArray.images);
+            document.getElementById("image1").src = productInfoArray.images[0]
+            document.getElementById("image2").src = productInfoArray.images[1]
+            document.getElementById("image3").src = productInfoArray.images[2]
+            document.getElementById("image4").src = productInfoArray.images[3]
+            document.getElementById("image5").src = productInfoArray.images[4]
+
         }
     });
 
