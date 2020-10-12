@@ -35,7 +35,9 @@ function sortProducts(criteria, array) {
     return result;
 }
 
-
+function addCart(i) {
+    localStorage.setItem(`product${i}`, JSON.stringify({ name: currentProductsArray[i].name, count: 1, unitCost: currentProductsArray[i].cost, currency: currentProductsArray[i].currency, src: currentProductsArray[i].imgSrc }));
+}
 
 function showProductsList() {
 
@@ -48,21 +50,27 @@ function showProductsList() {
 
             if (buscar == undefined || product.name.toLowerCase().indexOf(buscar) != -1) {
                 htmlContentToAppend += `
-                <a href="product-info.html" class="list-group-item list-group-item-action">
+                
+                <div class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-3">
-                            <img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
+                        <a href="product-info.html" style="text-decoration: none;"><img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
                         </div>
                         <div class="col">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">${product.name}</h4><br>
+                                <h4 class="mb-1">${product.name}</h4><br></a>
+                                
                                 <small class="text-muted">${product.soldCount} Productos vendidos</small>
                             </div>
                             <p class="mb-1">${product.description}</p><br>
                             <p>Precio: ${product.currency} ${product.cost}</p>
                         </div>
                     </div>
-                </a>
+                    
+                
+                <button type="button" class="btn btn-primary" style="float: right;" id="addcart${i}" onclick="addCart(${i})">Agregar al carrito</button>
+                
+                </div>
                 `
             }
         }
@@ -85,8 +93,8 @@ function sortAndShowProducts(sortCriteria, productsArray) {
 }
 
 
-
 document.addEventListener("DOMContentLoaded", function (e) {
+
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             sortAndShowProducts(ORDER_ASC_BY_PRICE, resultObj.data);
@@ -136,12 +144,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
         showProductsList();
 
     });
-    
-    document.getElementById('searchbar').addEventListener('input', function(){
+
+    document.getElementById('searchbar').addEventListener('input', function () {
         buscar = document.getElementById('searchbar').value.toLowerCase();
         showProductsList();
     })
 
+    document.getElementById("sortAsc").addEventListener("click", function () {
+        sortAndShowProducts(ORDER_ASC_BY_PRICE);
+    });
 
 
 });

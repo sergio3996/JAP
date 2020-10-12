@@ -52,15 +52,197 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 11/10/2020) y Entrega 6 (Fecha de entrega:
-        25/10/2020).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <main>
+    <div class="container">
+      <section id="micarrito">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="mb-3">
+              <div class="pt-4 wish-list">
+                <h5 class="mb-4">Mi Carrito</h5>
+                <br<br>
+                  <div id="cart">
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="mb-3">
+              <div class="pt-4">
+                <h5 class="mb-3">Total de articulos</h5>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                    Subtotal por articulo
+                    <div id="subtotal1">
+
+
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    Envió
+                    <span><a href="#" id="EnvioModal" data-target="#modalEnvio"
+                        data-toggle="modal">[Seleccionar]</a></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <div>
+                      <strong>
+                        <p class="mb-0">Costo de Envió</p>
+                      </strong>
+                    </div>
+                    <span><strong id="costoenvio"></strong></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <div>
+                      <strong>
+                        <p class="mb-0">Costo total de articulos</p>
+                      </strong>
+                    </div>
+                    <span><strong>USD </strong><strong id="total"></strong></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                    <div>
+                      <strong>
+                        <p class="mb-0">Costo Total</p>
+                      </strong>
+                    </div>
+                    <span><strong id="totalConEnvio"></strong></span>
+                  </li>
+                </ul>
+                <button type="button" class="btn btn-primary btn-block" data-target="#modalComprar"
+                  data-toggle="modal">Finalizar Compra</button>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="pt-4">
+
+              <h5 class="mb-4"><strong>Métodos de pago</strong></h5>
+
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                alt="Visa">
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                alt="American Express">
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                alt="Mastercard">
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+                alt="PayPal acceptance mark">
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+
+
+  <div class="modal fade" id="modalEnvio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Opciones de envió</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div>
+              <input id="estandar" name="envio" type="radio" value="10" required="" placeholder="Estandar">
+              <label for="estandar">Envió Estandar: 3-5 días (10% del total de la compra)</label> <br>
+              <input id="premium" name="envio" type="radio" value="20" required="" placeholder="Premium">
+              <label for="premium">Envio Premium: 1 días (20% del total de la compra)</label> <br>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="confirmenvio">Confirmar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="CancelEnvio">Cancelar</button>
+        </div>
+      </div>
     </div>
   </div>
+
+
+
+  <div class="modal fade" id="modalComprar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Datos del envió</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="needs-validation" novalidate>
+            <div>
+              <h4>Datos:</h4>
+              <input type="text" class="form-control" placeholder="Nombre" required pattern="[a-zA-Z ]+">
+              <div class="invalid-feedback">Por favor, ingresa tu nombre</div><br>
+              <input type="text" class="form-control" placeholder="Apellido" required pattern="[a-zA-Z ]+">
+              <div class="invalid-feedback">Por favor, ingresa tu apellido</div><br>
+              <input type="text" class="form-control" placeholder="Dirección" required pattern="[a-zA-Z0-9 ]+">
+              <div class="invalid-feedback">Por favor, ingresa tu dirección</div><br>
+            </div>
+            <div>
+              <label for="depto">Departamento</label><br>
+              <select class="form-control" id="depto" required>
+                <option>Montevideo</option>
+                <option>Canelones</option>
+                <option>Maldonado</option>
+                <option>Artigas</option>
+                <option>Rocha</option>
+                <option>San José</option>
+                <option>Soriano</option>
+                <option>Cerro Largo</option>
+                <option>Colonia</option>
+                <option>Durazno</option>
+                <option>Río Negro</option>
+                <option>Salto</option>
+                <option>Tacuarembó</option>
+                <option>Flores</option>
+                <option>Florida</option>
+                <option>Rivera</option>
+                <option>Paysandú</option>
+                <option>Lavalleja</option>
+                <option>Treinta y Tres</option>
+              </select><br>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary">Confirmar Compra</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -69,6 +251,9 @@
       <div></div>
     </div>
   </div>
+
+
+
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
