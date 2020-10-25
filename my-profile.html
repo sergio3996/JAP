@@ -52,13 +52,53 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container p-5 d-flex justify-content-center">
+    <div class="col-5">
+
+      <form id="needs-validation" novalidate>
+        <div class="form-group d-flex justify-content-center">
+          <img id="profileimg"
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></img><br><br>
+        </div>
+        <div class="form-group d-flex justify-content-center">
+          
+          <input type="text" class="form-control" id="urlprofileimg" placeholder="URL Profile Pic" required>
+        </div>
+        <div class="form-group">
+          <label>Nombres</label><br>
+          <input type="text" value="" class="form-control" id="name" required>
+          <div class="invalid-feedback">Por favor, ingresa tu nombre</div>
+        </div>
+
+        <div class="form-group">
+          <label>Apellidos</label><br>
+          <input type="text" value="" class="form-control" id="surnames" required>
+          <div class="invalid-feedback">Por favor, ingresa tu apellido</div>
+        </div>
+
+        <div class="form-group">
+          <label>Edad</label><br>
+          <input type="text" value="" class="form-control" id="age" required>
+          <div class="invalid-feedback">Por favor, ingresa tu edad</div>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label><br>
+          <input type="text" value="" class="form-control" id="email" required>
+          <div class="invalid-feedback">Por favor, ingresa tu email</div>
+        </div>
+
+        <div class="form-group">
+          <label>Telefono</label><br>
+          <input type="text" value="" class="form-control" id="phone">
+          <div class="invalid-feedback">Por favor, ingresa tu telefono</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary col-12" id="save">Guardar</button>
+      </form>
     </div>
+
+
   </div>
   <footer class="text-muted bg-light">
     <div class="container">

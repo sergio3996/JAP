@@ -51,7 +51,7 @@
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
     </div>
-  </nav>
+  </nav><br>
 
   <main>
     <div class="container">
@@ -67,8 +67,26 @@
                   </div>
               </div>
             </div>
+            <div class="pt-4">
+
+              <h5 class="mb-4"><strong>Métodos de pago</strong></h5>
+
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                alt="Visa">
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                alt="American Express">
+              <img class="mr-2" width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                alt="Mastercard">
+              <img class="mr-2" width="45px"
+                src="https://cdn2.iconfinder.com/data/icons/symbol-blue-set-3/100/Untitled-1-69-512.png"
+                alt="Bank Account acceptance mark">
+            </div>
           </div>
-          <div class="col-lg-4">
+
+          <div class="col-lg-4 border">
             <div class="mb-3">
               <div class="pt-4">
                 <h5 class="mb-3">Total de articulos</h5>
@@ -82,9 +100,22 @@
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     Envió
-                    <span><a href="#" id="EnvioModal" data-target="#modalEnvio"
-                        data-toggle="modal">[Seleccionar]</a></span>
                   </li>
+                  
+                  <div class="btn-group btn-group-toggle">
+                    <label class="btn btn-secondary" id="option1">
+                      <input type="radio" name="shipping" autocomplete="off" value="5" checked> Estándar
+                    </label>
+                    <label class="btn btn-secondary" id="option2">
+                      <input type="radio" name="shipping" autocomplete="off" value="7"> Express
+                    </label>
+                    <label class="btn btn-secondary" id="option3">
+                      <input type="radio" name="shipping" rautocomplete="off" value="15"> Premium
+                    </label>
+                    
+                  </div><br>
+                  <p id="infoShipping" class="small muted text-center"></p>
+                  
                   <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <div>
                       <strong>
@@ -93,6 +124,7 @@
                     </div>
                     <span><strong id="costoenvio"></strong></span>
                   </li>
+                  <hr>
                   <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
                     <div>
                       <strong>
@@ -109,29 +141,61 @@
                     </div>
                     <span><strong id="totalConEnvio"></strong></span>
                   </li>
+                  
                 </ul>
-                <button type="button" class="btn btn-primary btn-block" data-target="#modalComprar"
-                  data-toggle="modal">Finalizar Compra</button>
+
+                <hr>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal"
+                    data-target="#paymentmethod" id="paymentmethodbutton">Método de pago</button>
+                    
+                  </div>
+                  <p id="payalert"></p>
+                
+                <hr>
+                <hr>
+                <form id="needs-validation" novalidate>
+                  <div>
+                    <h4>Datos de Envió:</h4>
+                    <input type="text" class="form-control" placeholder="Nombre" required pattern="[a-zA-Z ]+">
+                    <div class="invalid-feedback">Por favor, ingresa tu nombre</div><br>
+                    <input type="text" class="form-control" placeholder="Apellido" required pattern="[a-zA-Z ]+">
+                    <div class="invalid-feedback">Por favor, ingresa tu apellido</div><br>
+                    <label>Direccion:</label><br>
+                    <input type="text" class="form-control" placeholder="Calle" required pattern="[a-zA-Z0-9 ]+">
+                    <div class="invalid-feedback">Por favor, ingresa tu Calle</div><br>
+                    <input type="text" class="form-control" placeholder="Número" required pattern="[0-9 ]+">
+                    <div class="invalid-feedback">Por favor, ingresa tu Número</div><br>
+                    <input type="text" class="form-control" placeholder="Esquina" required pattern="[a-zA-Z0-9 ]+">
+                    <div class="invalid-feedback">Por favor, ingresa tu Esquina</div><br>
+                  </div>
+                  <div>
+                    <label for="pais">Pais:</label><br>
+                    <select class="form-control" id="pais" required>
+                      <option>Argentina</option>
+                      <option>Bolivia</option>
+                      <option>Brasil</option>
+                      <option>Chile</option>
+                      <option>Colombia</option>
+                      <option>Costa Rica</option>
+                      <option>Cuba</option>
+                      <option>Ecuador</option>
+                      <option>El Salvador</option>
+                      <option>Guatemala</option>
+                      <option>Honduras</option>
+                      <option>México</option>
+                      <option>Nicaragua</option>
+                      <option>Panamá</option>
+                      <option>Perú</option>
+                      <option>Puerto Rico</option>
+                      <option>República Dominicana</option>
+                      <option>Uruguay</option>
+                      <option>Venezuela</option>
+                    </select><br>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Confirmar Compra</button>
+                </form>
               </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="pt-4">
-
-              <h5 class="mb-4"><strong>Métodos de pago</strong></h5>
-
-              <img class="mr-2" width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                alt="Visa">
-              <img class="mr-2" width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                alt="American Express">
-              <img class="mr-2" width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                alt="Mastercard">
-              <img class="mr-2" width="45px"
-                src="https://mdbootstrap.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
-                alt="PayPal acceptance mark">
             </div>
           </div>
         </div>
@@ -140,98 +204,76 @@
 
   </main>
 
-
-
-  <div class="modal fade" id="modalEnvio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="paymentmethod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">Opciones de envió</h2>
+          <h5 class="modal-title" id="exampleModalLabel">Método de pago</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form>
-            <div>
-              <input id="estandar" name="envio" type="radio" value="10" required="" placeholder="Estandar">
-              <label for="estandar">Envió Estandar: 3-5 días (10% del total de la compra)</label> <br>
-              <input id="premium" name="envio" type="radio" value="20" required="" placeholder="Premium">
-              <label for="premium">Envio Premium: 1 días (20% del total de la compra)</label> <br>
+          <div class="btn-group btn-group-toggle w-100">
+            <label class="btn btn-secondary active" id="creditcardButton">
+              <input type="radio" name="paymethod" id="creditcard" value="1" checked=""> Tarjeta de Crédito
+            </label>
+            <label class="btn btn-secondary" id="bankaccountButton">
+              <input type="radio" name="paymethod" id="bankaccount" value="2"> Cuenta Bancaria
+            </label>
+          </div><br><br>
+          <div id="cardDetails">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Nombre</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" pattern="[a-zA-Z ]+">
+                <small class="text-muted">Nombre completo de la tarjeta</small>
+                
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Número de tarjeta</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" pattern="[0-9]+">
+                
+              </div>
             </div>
-          </form>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Vencimiento</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="">
+                
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-cvv">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" pattern="[0-9]+">
+                
+              </div>
+            </div>
+          </div>
+          <div class="d-none" id="bankDetails">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="bank">Banco</label>
+              <select class="form-control" id="bank" required>
+                <option>BBVA</option>
+                <option>Santander</option>
+                <option>BROU</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="account">Número de Cuenta</label>
+              <input type="text" class="form-control" id="account" placeholder="" required pattern="[0-9 ]+">
+              
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="confirmenvio">Confirmar</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="CancelEnvio">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="modal fade" id="modalComprar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">Datos del envió</h2>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="needs-validation" novalidate>
-            <div>
-              <h4>Datos:</h4>
-              <input type="text" class="form-control" placeholder="Nombre" required pattern="[a-zA-Z ]+">
-              <div class="invalid-feedback">Por favor, ingresa tu nombre</div><br>
-              <input type="text" class="form-control" placeholder="Apellido" required pattern="[a-zA-Z ]+">
-              <div class="invalid-feedback">Por favor, ingresa tu apellido</div><br>
-              <input type="text" class="form-control" placeholder="Dirección" required pattern="[a-zA-Z0-9 ]+">
-              <div class="invalid-feedback">Por favor, ingresa tu dirección</div><br>
-            </div>
-            <div>
-              <label for="depto">Departamento</label><br>
-              <select class="form-control" id="depto" required>
-                <option>Montevideo</option>
-                <option>Canelones</option>
-                <option>Maldonado</option>
-                <option>Artigas</option>
-                <option>Rocha</option>
-                <option>San José</option>
-                <option>Soriano</option>
-                <option>Cerro Largo</option>
-                <option>Colonia</option>
-                <option>Durazno</option>
-                <option>Río Negro</option>
-                <option>Salto</option>
-                <option>Tacuarembó</option>
-                <option>Flores</option>
-                <option>Florida</option>
-                <option>Rivera</option>
-                <option>Paysandú</option>
-                <option>Lavalleja</option>
-                <option>Treinta y Tres</option>
-              </select><br>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-secondary">Confirmar Compra</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-            </div>
-          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
 
 
   <footer class="text-muted bg-light">

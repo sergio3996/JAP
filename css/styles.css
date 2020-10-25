@@ -73,14 +73,6 @@ footer p {
   background: white;
 }
 
-.alert{
-  position: fixed;
-  top:80px;
-  width: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -176,9 +168,7 @@ a.custom-card:hover {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.btn,.btn-lg,.btn-primary,.btn-block{
-  background-color: #2f0cafb2;
-}
+
 
 /* Info Usuario */
 #infoUsuario{
@@ -215,3 +205,7 @@ float: right;
   text-align: right;
 }
 
+#profileimg{
+  border-radius: 50% 50% 50% 50% !important;
+  width: 135px;
+}

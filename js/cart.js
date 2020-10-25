@@ -1,15 +1,16 @@
 
 var cartList = [];
+var cartBUY = []
 
 function calcTotal() {
   let total = 0;
-  let subs = document.getElementsByClassName("subtotal");
+  let subs = $(".subtotal");
 
   for (let i = 0; i < subs.length; i++) {
     total += parseInt(subs[i].innerHTML);
   }
 
-  document.getElementById("total").innerHTML = total;
+  $("#total").html(total);
   calcEnvio()
 
 }
@@ -91,16 +92,78 @@ function showCart(array) {
 }
 
 
+function selectPayment() {
+  let payMethod = $("input[name='paymethod']");
+
+  for (let i = 0; i < payMethod.length; i++) {
+    if (payMethod[i].checked && (payMethod[i].value) == "1") {
+      $("#cardDetails").removeClass("d-none");
+      $("#bankDetails").addClass("d-none");
+      $("#bankaccountButton").removeClass("active");
+      $("#creditcardButton").addClass("active");
+
+    } else if (payMethod[i].checked && (payMethod[i].value) == "2") {
+      $("#cardDetails").addClass("d-none");
+      $("#bankDetails").removeClass("d-none")
+      $("#creditcardButton").removeClass("active");
+      $("#bankaccountButton").addClass("active");
+    }
+  }
+}
+
+function validPayment() {
+  let cardNumber = $("#cc-number").val();
+  let cardName = $("#cc-name").val();
+  let cardExpirantion = $("#cc-expiration").val();
+  let cardCvv = $("#cc-cvv").val();
+  let bankAccount = $("#account").val();
+  let payMethod = $("input[name='paymethod']");
+  let validatedPayment = true;
+
+  for (let i = 0; i < payMethod.length; i++) {
+    if (payMethod[i].checked && (payMethod[i].value) == "1") {
+      if (cardName == "" || cardNumber == "" || cardExpirantion == "" || cardCvv == "") {
+        validatedPayment = false;
+      } else {
+        validatedPayment = true;
+      }
+    } else if (payMethod[i].checked && (payMethod[i].value) == "2") {
+      if (bankAccount == "") {
+        validatedPayment = false;
+      } else {
+        validatedPayment = true;
+      }
+    }
+  }
+  return validatedPayment;
+}
+
+
+
 function calcEnvio() {
   let total = parseInt(document.getElementById("total").innerHTML);
   let envio = 0
-  let selected = ""
 
-  let elements = document.getElementsByName("envio");
+  let elements = document.getElementsByName("shipping");
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].checked) {
       envio = parseInt(elements[i].value);
-      selected = elements[i].placeholder;
+    }
+    if (elements[i].checked && elements[i].value == "5") {
+      $("#infoShipping").html("El costo de envío será el 5% del costo total")
+      $("#option1").addClass("active")
+      $("#option2").removeClass("active")
+      $("#option3").removeClass("active")
+    } else if (elements[i].checked && elements[i].value == "7") {
+      $("#infoShipping").html("El costo de envío será el 7% del costo total")
+      $("#option1").removeClass("active")
+      $("#option2").addClass("active")
+      $("#option3").removeClass("active")
+    } else if (elements[i].checked && elements[i].value == "15") {
+      $("#infoShipping").html("El costo de envío será el 15% del costo total")
+      $("#option1").removeClass("active")
+      $("#option2").removeClass("active")
+      $("#option3").addClass("active")
     }
   }
 
@@ -108,12 +171,10 @@ function calcEnvio() {
   let totalEnvio = porcentaje * total;
   let totalConEnvio = total + porcentaje * total;
 
-  document.getElementById("totalConEnvio").innerHTML = totalConEnvio == 0 ? "" : "USD " + totalConEnvio;
-  document.getElementById("EnvioModal").innerHTML = totalEnvio == 0 ? "[Seleccionar]" : `[${selected}]`;
-  document.getElementById("costoenvio").innerHTML = totalEnvio == 0 ? "" : "USD " + totalEnvio;
+  document.getElementById("totalConEnvio").innerHTML = totalConEnvio == 0 ? "" : "USD " + Math.round(totalConEnvio);
+  document.getElementById("costoenvio").innerHTML = totalEnvio == 0 ? "" : "USD " + Math.round(totalEnvio);
 
 }
-
 
 function deleteProduct(i) {
   if (cartList.length > 1) {
@@ -131,7 +192,6 @@ function deleteProduct(i) {
 }
 
 
-
 document.addEventListener("DOMContentLoaded", function (e) {
 
   let usuarioLogueado = localStorage.getItem('Usuario');
@@ -143,20 +203,72 @@ document.addEventListener("DOMContentLoaded", function (e) {
     window.location = "index.html"
   }
 
+  let elements = document.getElementsByName("shipping");
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("change", function () {
+      calcEnvio();
+    });
+  }
+
+  $("input[name='paymethod']").on('change', function (e) {
+    selectPayment();
+  });
+
+
   let form = document.getElementById("needs-validation");
 
   form.addEventListener('submit', function (e) {
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
+      if (validPayment()) {
+        $("#paymentmethodbutton").addClass("btn-success");
+        $("#payalert").html(`
+        <div class="alert alert-success alert-dismissible text-center show" role="alert">
+        <strong>Método de pago ingresado</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-labal="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        `)
+      } else {
+        $("#paymentmethodbutton").addClass("btn-danger");
+        $("#payalert").html(`
+        <div class="alert alert-danger alert-dismissible text-center show" role="alert">
+        <strong>Ingrese el método de pago</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-labal="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        `)
+
+      }
+    } else {
+      if (validPayment()) {
+        $("#micarrito").html(`
+        <div class="alert alert-success alert-dismissible text-center show" role="alert">
+        <strong>${cartBUY.msg}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-labal="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+`)
+      } else {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#paymentmethodbutton").addClass("btn-danger");
+        $("#payalert").html(`
+        <div class="alert alert-danger alert-dismissible text-center show" role="alert">
+        <strong>Ingrese el método de pago</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-labal="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        `)
+      }
     }
     form.classList.add("was-validated");
   })
-
-  let elements = document.getElementsByName("envio");
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].checked = false
-  }
 
   getJSONData(CART_INFO_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {
@@ -181,18 +293,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
   })
 
-  document.getElementById("confirmenvio").addEventListener("click", function () {
-    showCart(cartList);
-  })
+  getJSONData(CART_BUY_URL).then(function (resultObj) {
+    if (resultObj.status === "ok") {
 
-  document.getElementById("CancelEnvio").addEventListener("click", function () {
-    let elements = document.getElementsByName("envio");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].checked = false
+      cartBUY = resultObj.data;
     }
-    showCart(cartList);
-    document.getElementById("EnvioModal").innerHTML = `[Seleccionar]`;
-
   })
 
 

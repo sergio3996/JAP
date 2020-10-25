@@ -68,7 +68,7 @@ function showProductsList() {
                     </div>
                     
                 
-                <button type="button" class="btn btn-primary" style="float: right;" id="addcart${i}" onclick="addCart(${i})">Agregar al carrito</button>
+                <button type="button" class="btn btn-primary" style="float: right;"id="addcart${i}" onclick="addCart(${i})">Agregar al carrito</button>
                 
                 </div>
                 `
@@ -153,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("sortAsc").addEventListener("click", function () {
         sortAndShowProducts(ORDER_ASC_BY_PRICE);
     });
-
 
 });
 
