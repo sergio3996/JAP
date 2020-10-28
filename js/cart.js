@@ -1,6 +1,7 @@
 
 var cartList = [];
-var cartBUY = []
+var cartBUY = [];
+var productsArray = [];
 
 function calcTotal() {
   let total = 0;
@@ -41,7 +42,6 @@ function showCart(array) {
 
     let product = array[i];
     let sub = product.count * product.unitCost;
-
 
     htmlContentToAppend += `
                 <div class="row mb-4">
@@ -150,17 +150,17 @@ function calcEnvio() {
       envio = parseInt(elements[i].value);
     }
     if (elements[i].checked && elements[i].value == "5") {
-      $("#infoShipping").html("El costo de envío será el 5% del costo total")
+      $("#infoShipping").html("El costo de envío será el 5% del costo total de articulos")
       $("#option1").addClass("active")
       $("#option2").removeClass("active")
       $("#option3").removeClass("active")
     } else if (elements[i].checked && elements[i].value == "7") {
-      $("#infoShipping").html("El costo de envío será el 7% del costo total")
+      $("#infoShipping").html("El costo de envío será el 7% del costo total de articulos")
       $("#option1").removeClass("active")
       $("#option2").addClass("active")
       $("#option3").removeClass("active")
     } else if (elements[i].checked && elements[i].value == "15") {
-      $("#infoShipping").html("El costo de envío será el 15% del costo total")
+      $("#infoShipping").html("El costo de envío será el 15% del costo total de articulos")
       $("#option1").removeClass("active")
       $("#option2").removeClass("active")
       $("#option3").addClass("active")
@@ -178,6 +178,14 @@ function calcEnvio() {
 
 function deleteProduct(i) {
   if (cartList.length > 1) {
+    let name = cartList[i].name
+    let carrito = JSON.parse(localStorage.getItem("carrito"))
+
+    if (carrito) {
+      let index = carrito.indexOf(name)
+      carrito.splice(index, 1)
+      localStorage.setItem("carrito", JSON.stringify(carrito))
+    }
     cartList.splice(i, 1);
     showCart(cartList);
   } else {
@@ -270,26 +278,32 @@ document.addEventListener("DOMContentLoaded", function (e) {
     form.classList.add("was-validated");
   })
 
+  getJSONData(PRODUCTS_URL).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      productsArray = resultObj.data;
+    }
+  });
+
   getJSONData(CART_INFO_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {
 
       cartList = resultObj.data.articles;
 
-      let newProduct1 = JSON.parse(localStorage.getItem(`product1`));
-      if (newProduct1) {
-        cartList.push(newProduct1)
-      }
-      let newProduct2 = JSON.parse(localStorage.getItem(`product2`));
-      if (newProduct2) {
-        cartList.push(newProduct2)
-      }
-      let newProduct3 = JSON.parse(localStorage.getItem(`product3`));
-      if (newProduct3) {
-        cartList.push(newProduct3)
+      let carrito = localStorage.getItem("carrito")
+      if (carrito) {
+        let arraycarrito = JSON.parse(carrito)
+        arraycarrito.forEach(function (currentValue) {
+          let currentItem = productsArray.find(x => x.name === currentValue)
+          if (currentItem) {
+            let objeto = { name: currentItem.name, count: 1, unitCost: currentItem.cost, currency: currentItem.currency, src: currentItem.imgSrc }
+            cartList.push(objeto)
+          }
+        })
+
+
       }
 
       showCart(cartList);
-
     }
   })
 
@@ -299,6 +313,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       cartBUY = resultObj.data;
     }
   })
+
 
 
 });

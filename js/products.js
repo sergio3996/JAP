@@ -36,42 +36,63 @@ function sortProducts(criteria, array) {
 }
 
 function addCart(i) {
-    localStorage.setItem(`product${i}`, JSON.stringify({ name: currentProductsArray[i].name, count: 1, unitCost: currentProductsArray[i].cost, currency: currentProductsArray[i].currency, src: currentProductsArray[i].imgSrc }));
+    let carrito = localStorage.getItem("carrito");
+    let arraycarrito = [];
+    let existente = false;
+    if (carrito) {
+        arraycarrito = JSON.parse(carrito)
+        arraycarrito.forEach(function (currentValue) {
+            if (currentValue.name == currentProductsArray[i].name) {
+                existente = true;
+                
+            }
+        })
+        if(existente){
+            alert("Este producto ya se encuentra en su carrito");
+        }else{
+            arraycarrito.push(currentProductsArray[i].name)
+        }
+
+    }else{
+        arraycarrito.push(currentProductsArray[i].name)
+    }
+
+    localStorage.setItem(`carrito`, JSON.stringify(arraycarrito));
 }
 
 function showProductsList() {
 
     let htmlContentToAppend = "";
+    let userLogged = localStorage.getItem("Usuario")
+    
     for (let i = 0; i < currentProductsArray.length; i++) {
         let product = currentProductsArray[i];
-
+        
         if (((minPrice == undefined) || (minPrice != undefined && parseInt(product.cost) >= minPrice)) &&
             ((maxPrice == undefined) || (maxPrice != undefined && parseInt(product.cost) <= maxPrice))) {
 
             if (buscar == undefined || product.name.toLowerCase().indexOf(buscar) != -1) {
                 htmlContentToAppend += `
-                
-                <div class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3">
-                        <a href="product-info.html" style="text-decoration: none;"><img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
-                        </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">${product.name}</h4><br></a>
-                                
-                                <small class="text-muted">${product.soldCount} Productos vendidos</small>
-                            </div>
-                            <p class="mb-1">${product.description}</p><br>
-                            <p>Precio: ${product.currency} ${product.cost}</p>
-                        </div>
+               
+                <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                <a href="product-info.html"><img class="card-img-top" src="${product.imgSrc}" alt="${product.description}"></a>
+                  <div class="card-body">
+                    <p class="card-text">${product.description}</p>
+                    <p class="card-text">Precio: ${product.currency} ${product.cost}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">Productos Vendidos ${product.soldCount}</small>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary ${userLogged? "":"d-none"}" style="float: right;font-size: 12px;" id="addcart${i}" onclick="addCart(${i})">Agregar al carrito</button>
+                      </div>
                     </div>
-                    
-                
-                <button type="button" class="btn btn-primary" style="float: right;"id="addcart${i}" onclick="addCart(${i})">Agregar al carrito</button>
-                
+                  </div>
                 </div>
+                </div>
+                
+               
                 `
+            
             }
         }
 
