@@ -21,7 +21,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="inicio.html">E-Mercado</a>
+        <a class="navbar-brand" href="inicio.html"><strong>e-Mercado</strong></a>
         <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
@@ -77,31 +77,23 @@
         </div>
       </div>
     </div>
-    <div class="row justify-content-around mb-2">
-      <div class="row col-md-6 col-sm-12">
-        <div class="row container p-0 m-0">
-          <div class="col">
-            <p class="font-weight-normal text-right my-2">Precio.</p>
-          </div>
-          <div class="col">
-            <input class="form-control" type="number" placeholder="min." id="rangeFilterPriceMin">
-          </div>
-          <div class="col">
-            <input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
-          </div>
-          <div class="col-3 p-0">
-            <div class="btn-group" role="group">
-              <button class="btn btn-light btn-block" id="rangeFilterPrice">Filtrar</button>
-              <button class="btn btn-link btn-sm" id="clearRangePrice">Limpiar</button>
-            </div>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col text-right">
+          <input type="text" id="searchbar" placeholder="Buscador" size="20">
+          <input class="" type="number" placeholder="min." id="rangeFilterPriceMin">
+          <input class="" type="number" placeholder="máx." id="rangeFilterPriceMax">      
+          <br>   
+          <button class="btn btn-primary btn-sm" id="rangeFilterPrice">Filtrar</button>
+          <button class="btn btn-secondary btn-sm" id="clearRangePrice">Limpiar</button>
         </div>
-        <input type="text" id="searchbar" placeholder="Buscador" size="25">
+        
+        
       </div>
-
     </div>
     <div class="row" id="productslist">
-      
+
+
     </div>
   </div>
   <footer class="text-muted bg-light">

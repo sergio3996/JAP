@@ -71,7 +71,7 @@ function showCart(array) {
                         </div>
                       </div>
                       <br><br>
-                      <button class="btn-danger" style="float: right;" onclick="deleteProduct(${i})">Quitar</button>
+                      <button class="btn btn-danger" style="float: right;" onclick="deleteProduct(${i})">Quitar</button>
                     </div>
                   </div>
                   <hr class="mb-4">
@@ -144,7 +144,7 @@ function calcEnvio() {
   let total = parseInt(document.getElementById("total").innerHTML);
   let envio = 0
 
-  let elements = document.getElementsByName("shipping");
+  let elements = $("input[name='shipping']");
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].checked) {
       envio = parseInt(elements[i].value);
