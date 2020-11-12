@@ -127,13 +127,13 @@
                   
                   <div class="btn-group btn-group-toggle">
                     <label class="btn btn-secondary" id="option1">
-                      <input type="radio" name="shipping" autocomplete="off" value="5" checked> Estándar
+                      <input type="radio" name="shipping" autocomplete="off" value="5" checked placeholder="Estándar">Estándar
                     </label>
                     <label class="btn btn-secondary" id="option2">
-                      <input type="radio" name="shipping" autocomplete="off" value="7"> Express
+                      <input type="radio" name="shipping" autocomplete="off" value="7" placeholder="Express">Express
                     </label>
                     <label class="btn btn-secondary" id="option3">
-                      <input type="radio" name="shipping" rautocomplete="off" value="15"> Premium
+                      <input type="radio" name="shipping" autocomplete="off" value="15" placeholder="Premium">Premium
                     </label>
                     
                   </div><br>
@@ -180,21 +180,21 @@
                 <form id="needs-validation" novalidate>
                   <div>
                     <h4>Datos de Envió:</h4>
-                    <input type="text" class="form-control" placeholder="Nombre" required pattern="[a-zA-Z ]+">
+                    <input type="text" id="name" class="form-control" placeholder="Nombre" required pattern="[a-zA-Z ]+">
                     <div class="invalid-feedback">Por favor, ingresa tu nombre</div><br>
-                    <input type="text" class="form-control" placeholder="Apellido" required pattern="[a-zA-Z ]+">
+                    <input type="text" id="surname" class="form-control" placeholder="Apellido" required pattern="[a-zA-Z ]+">
                     <div class="invalid-feedback">Por favor, ingresa tu apellido</div><br>
                     <label>Direccion:</label><br>
-                    <input type="text" class="form-control" placeholder="Calle" required pattern="[a-zA-Z0-9 ]+">
+                    <input type="text" id="street" class="form-control" placeholder="Calle" required pattern="[a-zA-Z0-9 ]+">
                     <div class="invalid-feedback">Por favor, ingresa tu Calle</div><br>
-                    <input type="text" class="form-control" placeholder="Número" required pattern="[0-9 ]+">
+                    <input type="text" id="number" class="form-control" placeholder="Número" required pattern="[0-9 ]+">
                     <div class="invalid-feedback">Por favor, ingresa tu Número</div><br>
-                    <input type="text" class="form-control" placeholder="Esquina" required pattern="[a-zA-Z0-9 ]+">
+                    <input type="text" id="corner" class="form-control" placeholder="Esquina" required pattern="[a-zA-Z0-9 ]+">
                     <div class="invalid-feedback">Por favor, ingresa tu Esquina</div><br>
                   </div>
                   <div>
-                    <label for="pais">Pais:</label><br>
-                    <select class="form-control" id="pais" required>
+                    <label for="country">Pais:</label><br>
+                    <select class="form-control" id="country" required>
                       <option>Argentina</option>
                       <option>Bolivia</option>
                       <option>Brasil</option>
@@ -286,7 +286,6 @@
             <div class="col-md-6 mb-3">
               <label for="account">Número de Cuenta</label>
               <input type="text" class="form-control" id="account" placeholder="" required pattern="[0-9 ]+">
-              
             </div>
           </div>
         </div>
@@ -297,6 +296,8 @@
       </div>
     </div>
   </div>
+
+
 
 
   <footer class="text-muted bg-light">

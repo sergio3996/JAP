@@ -1,7 +1,7 @@
-
 var cartList = [];
 var cartBUY = [];
 var productsArray = [];
+var API = false
 
 function calcTotal() {
   let total = 0;
@@ -253,7 +253,77 @@ document.addEventListener("DOMContentLoaded", function (e) {
       }
     } else {
       if (validPayment()) {
-        $("#micarrito").html(`
+        if (API) {
+          let newCheckOut = {}
+          var x = new Date();
+
+          let product = ""
+          for (i = 0; i < cartList.length; i++) {
+            item = cartList[i]
+            product += `${item.name}(Cantidad: ${item.count}) `
+          }
+
+          let elements = $("input[name='shipping']");
+          let shippingmethod = ""
+
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i].checked) {
+              shippingmethod = elements[i].placeholder;
+            }
+          }
+
+          let payMethod = $("input[name='paymethod']");
+
+          for (let i = 0; i < payMethod.length; i++) {
+            if (payMethod[i].checked && (payMethod[i].value) == "1") {
+
+              newCheckOut = {
+                type: 1,
+                dateTime: x.getFullYear() + "-" + (x.getMonth() + 1) + "-" + x.getDate() + "  " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds(),
+                total: $("#totalConEnvio").html(),
+                shipping: $("#costoenvio").html(),
+                shippingmethod1: shippingmethod,
+                products: product,
+                name: $("#name").val(),
+                surname: $("#surname").val(),
+                street: $("#street").val(),
+                corner: $("#corner").val(),
+                number: $("#number").val(),
+                country: $("#country").val(),
+                ccname: $("#cc-name").val(),
+                expiration: $("#cc-expiration").val(),
+                ccnumber: $("#cc-number").val(),
+                cccvv: $("#cc-cvv").val()
+              };
+
+            } else if (payMethod[i].checked && (payMethod[i].value) == "2") {
+              newCheckOut = {
+                type: 2,
+                dateTime: x.getFullYear() + "-" + (x.getMonth() + 1) + "-" + x.getDate() + "  " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds(),
+                total: $("#totalConEnvio").html(),
+                shipping: $("#costoenvio").html(),
+                shippingmethod1: shippingmethod,
+                products: product,
+                name: $("#name").val(),
+                surname: $("#surname").val(),
+                street: $("#street").val(),
+                corner: $("#corner").val(),
+                number: $("#number").val(),
+                country: $("#country").val(),
+                bank: $("#bank").val(),
+                accountnumber: $("#account").val(),
+
+              };
+            }
+          }
+
+          postJSONData(CHECKOUT, newCheckOut).then(function (resultObj) {
+            if (resultObj.status === "ok") {
+              alert(resultObj.data.msj)
+            }
+          })
+
+          $("#micarrito").html(`
         <div class="alert alert-success alert-dismissible text-center show" role="alert">
         <strong>${cartBUY.msg}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-labal="Close">
@@ -261,6 +331,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
         </button>
         </div>
 `)
+        } else {
+          $("#micarrito").html(`
+        <div class="alert alert-success alert-dismissible text-center show" role="alert">
+        <strong>${cartBUY.msg}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-labal="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+`)
+        }
+
+
+
       } else {
         e.preventDefault();
         e.stopPropagation();

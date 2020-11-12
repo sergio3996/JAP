@@ -79,11 +79,11 @@
     <div class="row justify-content-md-center">
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Información del producto</h4>
-        <form class="needs-validation" id="sell-info">
+        <form action="/new-product" method="POST" id="needs-validation" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="productName">Nombre</label>
-              <input type="text" class="form-control" id="productName" placeholder="" value="">
+              <input type="text" name="name" class="form-control" id="productName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Ingresa un nombre
               </div>
@@ -102,13 +102,13 @@
           <div class="row">
             <div class="col-md-12 mb-3">
               <label for="productDescription">Descripción</label>
-              <textarea class="form-control" id="productDescription" rows="3"></textarea>
+              <textarea class="form-control" id="productDescription" name="description" rows="3" required></textarea>
             </div>
           </div>
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="zip">Costo</label>
-              <input type="number" class="form-control" id="productCostInput" placeholder="" required="" value="0"
+              <input type="number" name="cost" class="form-control" id="productCostInput" placeholder="" required value="0"
                 min="0">
               <div class="invalid-feedback">
                 El costo debe ser mayor que 0.
@@ -116,7 +116,7 @@
             </div>
             <div class="col-md-4 mb-3">
               <label for="state">Moneda</label>
-              <select class="custom-select d-block w-100" id="productCurrency" required="">
+              <select class="custom-select d-block w-100" name="currency" id="productCurrency" required>
                 <option selected>Pesos Uruguayos (UYU)</option>
                 <option>Dólares (USD)</option>
               </select>
@@ -128,7 +128,7 @@
           <div class="row">
             <div class="col-md-7 mb-3">
               <label for="state">Categoría</label>
-              <select class="custom-select d-block w-100" id="productCategory">
+              <select name="category" class="custom-select d-block w-100" id="productCategory" required>
                 <option value="">Elija la categoría...</option>
                 <option>Autos</option>
                 <option>Juguetes</option>
@@ -145,7 +145,7 @@
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="productCountInput">Cantidad en stock</label>
-              <input type="number" class="form-control" id="productCountInput" placeholder="" required="" value="1"
+              <input type="number" name="count" class="form-control" id="productCountInput" placeholder="" required value="1"
                 min="0">
               <div class="invalid-feedback">
                 La cantidad es requerida.
@@ -157,15 +157,15 @@
           <div class="d-block my-3">
             <div class="custom-control custom-radio">
               <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked=""
-                required="">
+                required value="Gold">
               <label class="custom-control-label" for="goldradio">Gold (13%)</label>
             </div>
             <div class="custom-control custom-radio">
-              <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+              <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required value="Premium">
               <label class="custom-control-label" for="premiumradio">Premium (7%)</label>
             </div>
             <div class="custom-control custom-radio">
-              <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+              <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required value="Estándar">
               <label class="custom-control-label" for="standardradio">Estándar (3%)</label>
             </div>
             <div class="row">
@@ -185,7 +185,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">P0rcentaje</h6>
+                <h6 class="my-0">Porcentaje</h6>
                 <small class="text-muted">Según el tipo de publicación</small>
               </div>
               <span class="text-muted" id="comissionText">-</span>

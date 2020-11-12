@@ -3,13 +3,11 @@ function loadProfile() {
     let profile = JSON.parse(localStorage.getItem("profile"));
     $("#profileimg").attr("src", profile.pic);
     $("#profileimg").val(profile.pic);
-    
     $("#name").val(profile.names);
     $("#surnames").val(profile.surnames);
     $("#age").val(profile.age);
     $("#email").val(profile.email);
     $("#phone").val(profile.phone);
-
   }
 }
 
@@ -22,10 +20,6 @@ function save() {
   profile.email = $("#email").val();
   profile.phone = $("#phone").val();
 
-  if(profile.pic == ""){
-    profile.pic = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-  }
-  
   localStorage.setItem("profile", JSON.stringify(profile));
 }
 

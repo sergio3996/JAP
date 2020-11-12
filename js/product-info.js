@@ -32,7 +32,7 @@ function showComments(array) {
         htmlContentToAppend += '<p id="fecha">' + comment.dateTime + '</p>';
         htmlContentToAppend += '<hr id="hrcomentario">';
         stars = "";
-        
+
 
 
 
@@ -45,7 +45,7 @@ function showComments(array) {
 
 function showRelatedProducts(ArrayProducts, ArrayRelatedProducts) {
     let htmlContentToAppend = ''
-    ArrayRelatedProducts.forEach(function(i){
+    ArrayRelatedProducts.forEach(function (i) {
 
         htmlContentToAppend += `
         <a href="product-info.html" class="list-group-item list-group-item-action">
@@ -115,7 +115,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
             dateTime: x.getFullYear() + "-" + (x.getMonth() + 1) + "-" + x.getDate() + "  " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds()
         };
 
-
+        postJSONData(NEW_COMMENT, newComm).then(function (resultObj) {
+            if (resultObj.status === "ok") {
+                alert(resultObj.data.msj)
+            }
+        })
+        
         sendComment(newComm);
         showComments(commentsArray);
     })
